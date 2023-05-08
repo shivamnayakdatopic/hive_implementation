@@ -5,12 +5,14 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
 void main() async {
-
+  // This is also important to initialize. 
   WidgetsFlutterBinding.ensureInitialized();
-  var directory = await getApplicationDocumentsDirectory() ;
+  // We are getting directory for store all data in local app.
+  var directory = await getApplicationDocumentsDirectory();
+  // Initialize hive database in your application. 
   Hive.init(directory.path);
 
-  Hive.registerAdapter(NotesModelAdapter()) ;
+  Hive.registerAdapter(NotesModelAdapter());
   await Hive.openBox<NotesModel>('notes');
 
   runApp(const MyApp());
@@ -23,13 +25,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        primarySwatch: Colors.purple,
-      ),
-      home: HomeScreen()
-    );
+        title: 'Flutter Hive',
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
+        ),
+        home: HomeScreen());
   }
 }
-
